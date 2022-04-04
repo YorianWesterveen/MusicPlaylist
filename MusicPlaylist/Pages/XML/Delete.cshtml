@@ -1,0 +1,41 @@
+﻿@page
+@model MusicPlaylist.Pages.XML.DeleteModel
+@using System.Data
+@using Code.XML
+@{
+    ViewData["Title"] = "Voeg een nieuwe muzieknummer toe";
+
+    //XML
+    SongMethods xmlSongMethods = new SongMethods();
+    string xmlFile = @"\Data\Playlist.xml";
+    DataSet xmlDataSet = xmlSongMethods.GetAllSongs(xmlFile); 
+
+    if (HttpMethods.IsPost(Request.Method))
+    {
+        if (Request.Form["inputOptie"] == "Ja")
+        {
+            string id = Request.Query["id"];
+            xmlSongMethods.DeleteSong(id, xmlFile);
+        }
+
+        Response.Redirect("/XMl/Index");
+    }
+}
+
+<form method="post">
+    Weet je zeker dat je dit nummer wilt verwijderen?
+    <table>
+        <tr>
+            <td>ja</td>
+            <td><input type="radio" value="Ja" name="inputOptie"/></td>
+        </tr>
+        <tr>
+            <td>nee</td>
+            <td><input type="radio" value="nee" name="inputOptie"/></td>
+        </tr>
+        <tr>
+            <td>Submit</td>
+            <td><input type="submit"</td>
+        </tr>
+    </table>
+</form>

@@ -1,0 +1,61 @@
+﻿@page
+@model MusicPlaylist.Pages.XML.CreateModel
+@using System.Data
+@using Code.XML
+@{
+    ViewData["Title"] = "Voeg een nieuwe muzieknummer toe";
+
+    //XML
+    SongMethods xmlSongMethods = new SongMethods();
+    string xmlFile = @"\Data\Playlist.xml";
+    DataSet xmlDataSet = xmlSongMethods.GetAllSongs(xmlFile); 
+
+    if (HttpMethods.IsPost(Request.Method))
+    {
+        DataRow drSong = xmlSongMethods.GetEmptyDataRow();
+
+        drSong[0] = Request.Form["id"];
+        drSong[1] = Request.Form["artist"];
+        drSong[2] = Request.Form["title"];
+        drSong[3] = Request.Form["year"];
+        drSong[4] = Request.Form["genre"];
+        drSong[5] = Request.Form["time"];
+
+        xmlSongMethods.CreateSong(drSong, xmlFile);
+        Response.Redirect("/XML/Index");
+    }
+}
+
+
+<form method="post">
+    <table>
+        <tr>
+            <td>Id</td>
+            <td><input type="text" id="id" name="id"/></td>
+        </tr>
+        <tr>
+            <td>Artist</td>
+            <td><input type="text"id="artist" name="artist"/></td>
+        </tr>
+        <tr>
+            <td>Title</td>
+            <td><input type="text"id="title" name="title" /></td>
+        </tr>
+        <tr>
+            <td>Year</td>
+            <td><input type="text"id="year" name="year" /></td>
+        </tr>
+        <tr>
+            <td>Genre</td>
+            <td><input type="text" id="genre" name="genre"/></td>
+        </tr>
+        <tr>
+            <td>Time</td>
+            <td><input type="text"id="time" name="time" /></td>
+        </tr>
+        <tr>
+            <td>Submit</td>
+            <td><input type="submit"</td>
+        </tr>
+    </table>
+</form>
