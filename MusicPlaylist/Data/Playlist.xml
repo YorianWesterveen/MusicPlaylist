@@ -1,2 +1,11 @@
 <?xml version="1.0" standalone="yes"?>
-<Playlist />
+<Playlist>
+  <song>
+    <id>2</id>
+    <artist>sd</artist>
+    <title>sd</title>
+    <year>sd</year>
+    <genre>sd</genre>
+    <time>sd</time>
+  </song>
+</Playlist>

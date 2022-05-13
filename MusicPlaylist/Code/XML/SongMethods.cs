@@ -6,7 +6,7 @@ namespace MusicPlaylist.Code.XML
     {
         DataSet ds = new DataSet("Playlist");
         
-        public DataSet GetAllSongs(string file)
+        public List<songs> GetAllSongs(string file)
         {
             DataTable dtSongs = new DataTable("song");
 
@@ -26,8 +26,22 @@ namespace MusicPlaylist.Code.XML
 
             ds.Tables.Add(dtSongs);
 
-            ds.ReadXml(Environment.CurrentDirectory + file);
+            try
+            {
+                ds.ReadXml(Environment.CurrentDirectory + file);
+            }
+            catch (Exception ex)
+            {
 
+            }
+
+            List<Song> songList = new List<Song>();
+            foreach(DataRow dr in ds.Tables[0].Rows)
+            {
+                Song X = new Song();
+
+                songList.Add(x);
+            }
             return ds;
         }
         
@@ -53,6 +67,21 @@ namespace MusicPlaylist.Code.XML
             }
         }
 
+        public void EditSong(string id, DataRow editedRow, string file)
+        {
+            DataRow[] drSongs = ds.Tables["song"].Select("id = '" + id + "'");
+            if (drSongs != null && drSongs.Length > 0)
+            {
+                drSongs[0]["id"] = editedRow["id"];
+                drSongs[0]["artist"] = editedRow["artist"];
+                drSongs[0]["title"] = editedRow["title"];
+                drSongs[0]["year"] = editedRow["year"];
+                drSongs[0]["genre"] = editedRow["genre"];
+                drSongs[0]["time"] = editedRow["time"];
+
+                ds.WriteXml(Environment.CurrentDirectory + file);
+            }
+        }
     }
     
 }
