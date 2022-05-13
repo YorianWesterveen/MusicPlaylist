@@ -22,6 +22,7 @@
                 <th scope="col">Year</th>
                 <th scope="col">Genre</th>
                 <th scope="col">Time</th>
+                <th scope="col">Edit</th>
                 <th scope="col">Verwijderen</th>
             </tr>
         </thead>
@@ -35,6 +36,7 @@
             <td>@drSong["year"]</td>
             <td>@drSong["genre"]</td>
             <td>@drSong["time"]</td>
+            <td><a href="/Xml/Edit?id=@drSong["id"]">Edit<a/></td>
             <td><a href="/Xml/Delete?id=@drSong["id"]">Verwijderen<a/></td>
         </tr>
     }

@@ -1,0 +1,64 @@
+﻿@page
+@model MusicPlaylist.Pages.XML.CreateModel
+@using System.Data
+@using Code.XML
+@{
+    ViewData["Title"] = "bewerk nummer";
+
+    //XML
+    SongMethods xmlSongMethods = new SongMethods();
+    string xmlFile = @"\Data\Playlist.xml";
+    DataSet xmlDataSet = xmlSongMethods.GetAllSongs(xmlFile); 
+    
+    string id = Request.Query["id"];
+    DataRow[] drSongs = xmlDataSet.Tables["song"].Select("id = '" + id + "'");
+
+    if (HttpMethods.IsPost(Request.Method))
+    {
+        DataRow drSong = xmlSongMethods.GetEmptyDataRow();
+
+        drSong[0] = Request.Form["id"];
+        drSong[1] = Request.Form["artist"];
+        drSong[2] = Request.Form["title"];
+        drSong[3] = Request.Form["year"];
+        drSong[4] = Request.Form["genre"];
+        drSong[5] = Request.Form["time"];
+
+        xmlSongMethods.EditSong(id, drSong, xmlFile);
+        Response.Redirect("/XML/Index");
+    }
+}
+
+
+<form method="post">
+    <table>
+        <tr>
+            <td>Id</td>
+            <td><input type="text" id="id" value="@drSongs[0]["id"]" name="id"/></td>
+        </tr>
+        <tr>
+            <td>Artist</td>
+            <td><input type="text"id="artist" value="@drSongs[0]["artist"]" name="artist"/></td>
+        </tr>
+        <tr>
+            <td>Title</td>
+            <td><input type="text"id="title" value="@drSongs[0]["title"]" name="title" /></td>
+        </tr>
+        <tr>
+            <td>Year</td>
+            <td><input type="text"id="year" value="@drSongs[0]["year"]" name="year" /></td>
+        </tr>
+        <tr>
+            <td>Genre</td>
+            <td><input type="text" id="genre" value="@drSongs[0]["genre"]" name="genre"/></td>
+        </tr>
+        <tr>
+            <td>Time</td>
+            <td><input type="text"id="time" value="@drSongs[0]["time"]" name="time" /></td>
+        </tr>
+        <tr>
+            <td>Submit</td>
+            <td><input type="submit" /></td>
+        </tr>
+    </table>
+</form>
