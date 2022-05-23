@@ -5,7 +5,23 @@ namespace MusicPlaylist.Code.XML
     public class SongMethods
     {
         DataSet ds = new DataSet("Playlist");
+        public SongMethods()
+        {
+            try
+            {
+                string jsonString = File.ReadAllText(filename);
+                songslist = JsonConvert.DeserializeObject<list<Song>>(jsonString);
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+       
+        private list<Song> songslist = null; 
+        private string filename = Environment.CurrentDirectory + "\\Data\\SongMethods.json";
         
+
         public List<songs> GetAllSongs(string file)
         {
             DataTable dtSongs = new DataTable("song");
@@ -81,6 +97,11 @@ namespace MusicPlaylist.Code.XML
 
                 ds.WriteXml(Environment.CurrentDirectory + file);
             }
+        }
+        public void save()
+        {
+            string json = jsonConvert.SerializeObject(Songs);
+            File.WriteAllText(filename, json);
         }
     }
     
