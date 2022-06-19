@@ -2,36 +2,36 @@
 @model MusicPlaylist.Pages.XML.CreateModel
 @using System.Data
 @using Code.XML
+@using MusicPlaylist.Code
+@using Newtonsoft.Json
+
+
 @{
-    ViewData["Title"] = "Voeg een nieuwe muzieknummer toe";
-
-    //XML
-    SongMethods xmlSongMethods = new SongMethods();
-    string xmlFile = @"\Data\Playlist.xml";
-    DataSet xmlDataSet = xmlSongMethods.GetAllSongs(xmlFile); 
-
-    if (HttpMethods.IsPost(Request.Method))
+    if (Request.Method == "POST")
     {
-        DataRow drSong = xmlSongMethods.GetEmptyDataRow();
+        Song Nieuwliedje = new Song();
 
-        drSong[0] = Request.Form["id"];
-        drSong[1] = Request.Form["artist"];
-        drSong[2] = Request.Form["title"];
-        drSong[3] = Request.Form["year"];
-        drSong[4] = Request.Form["genre"];
-        drSong[5] = Request.Form["time"];
+        Nieuwliedje.id = (Request.Form["id"]);
+        Nieuwliedje.artist = Request.Form["artist"];
+        Nieuwliedje.title = Request.Form["title"];
+        Nieuwliedje.year = (Request.Form["year"]);
+        Nieuwliedje.genre = (Request.Form["genre"]);
+        Nieuwliedje.time = Request.Form["time"];
+        Nieuwliedje.url = Request.Form.Files[0].FileName;
 
-        xmlSongMethods.CreateSong(drSong, xmlFile);
-        Response.Redirect("/XML/Index");
+        SongMethods sm = new SongMethods();
+        sm.AddSong(Nieuwliedje);
+
+        Response.Redirect("Index");
     }
 }
 
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     <table>
         <tr>
             <td>Id</td>
-            <td><input type="text" id="id" name="id"/></td>
+            <td><input type="text" id="id" name="id" /></td>
         </tr>
         <tr>
             <td>Artist</td>
@@ -54,8 +54,12 @@
             <td><input type="text"id="time" name="time" /></td>
         </tr>
         <tr>
+            <td>file</td>
+            <td><input type="file" id="file" name="file" /></td>
+        </tr>
+        <tr>
             <td>Submit</td>
-            <td><input type="submit" /></td>
+            <td><input type="submit" asp-page-handler="Upload" /></td>
         </tr>
     </table>
 </form>

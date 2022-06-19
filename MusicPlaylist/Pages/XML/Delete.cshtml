@@ -2,28 +2,28 @@
 @model MusicPlaylist.Pages.XML.DeleteModel
 @using System.Data
 @using Code.XML
+@using MusicPlaylist.Code
+@using Newtonsoft.Json
+
 @{
-    ViewData["Title"] = "Voeg een nieuwe muzieknummer toe";
+    string id = Request.Query["id"];
+    SongMethods sm = new SongMethods();
 
-    //XML
-    SongMethods xmlSongMethods = new SongMethods();
-    string xmlFile = @"\Data\Playlist.xml";
-    DataSet xmlDataSet = xmlSongMethods.GetAllSongs(xmlFile); 
+    Song x = sm.GetSong(id);
 
-    if (HttpMethods.IsPost(Request.Method))
+    if (Request.Method == "POST")
     {
         if (Request.Form["inputOptie"] == "Ja")
         {
-            string id = Request.Query["id"];
-            xmlSongMethods.DeleteSong(id, xmlFile);
+            sm.DeleteSong(id);
         }
 
-        Response.Redirect("/XMl/Index");
+        Response.Redirect("Index");
     }
 }
 
 <form method="post">
-    Weet je zeker dat je dit nummer wilt verwijderen?
+    Weet je zeker @x.artist - @x.title wilt verwijderen <br />
     <table>
         <tr>
             <td>ja</td>
