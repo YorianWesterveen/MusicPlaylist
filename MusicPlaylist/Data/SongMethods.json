@@ -1,14 +1,1 @@
-[
-  {
-    "id": 1,
-    "artist": "Muse",
-    "title": "Psycho",
-    "year": 2018
-  },
-  {
-    "id": 2,
-    "artist": "Bon Jovi",
-    "title": "Living on a Prayer",
-    "year": 1986
-  }
-]
+[{"title":"Psycho","artist":"Muse","id":"1","year":"2018","genre":null,"time":null,"url":null},{"title":"Living on a Prayer","artist":"Bon Jovi","id":"2","year":"1986","genre":null,"time":null,"url":null},{"title":"dsafghj.","artist":"asfdg","id":"3","year":"sadfghjk","genre":"Asdfgjh","time":"aSDFGHJK","url":"Gxth Btch.mp3"},{"title":"SDFSG","artist":"dsaf","id":"5","year":"DFGH","genre":"DSFGHJ","time":"DFGH","url":"Gxth Btch.mp3"}]

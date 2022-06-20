@@ -7,6 +7,11 @@ namespace MusicPlaylist.Pages.XML
     {
         private IWebHostEnvironment Environment;
 
+        public CreateModel(IWebHostEnvironment _environment)
+        {
+            Environment = _environment;
+        }
+
         public string Nieuwliedje;
             
 

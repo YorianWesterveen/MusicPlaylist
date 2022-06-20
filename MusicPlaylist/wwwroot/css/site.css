@@ -14,5 +14,20 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-image: linear-gradient(#4c5b5c, #3c5b5c, #50645c, #00d4ff);
 }
+
+#id {
+    color: #ED254E;
+}
+
+.tbody {
+    color: #35CE8D;
+}
+
+#Spot {
+    width: 50px;
+    height: 50px; 
+}
+

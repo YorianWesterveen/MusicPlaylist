@@ -9,11 +9,11 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">XMl</h1>
+    <h1 class="display-4">Json</h1>
     <table class="table">
-        <thead>
+        <thead class="tbody">
             <tr>
-                <th scope="col">Id</th>
+                <th id="id" scope="col">Id</th>
                 <th scope="col">Artist</th>
                 <th scope="col">Title</th>
                 <th scope="col">Year</th>
@@ -38,7 +38,7 @@
                 @{if (s.url != null )
                 }
                 <audio controls>
-                    <source src="../uploads/@s.url">
+                    <source src="~/Uploads/@s.url">
                 </audio>
             </td>
             <td><a href="/Xml/Edit?id=@s.id">Edit</a></td>
@@ -49,5 +49,5 @@
     </table>
     <br />
     <br />
-    <a href="/Xml/Create">Een nieuwe song toevoegen.</a>
+    <a id="Create" href="/Xml/Create">Een nieuwe song toevoegen.</a>
 </div>
